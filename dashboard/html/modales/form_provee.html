@@ -1,0 +1,69 @@
+<head>
+    <style>
+        #formAgregarUsuario {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            padding: 32px;
+            max-width: 400px;
+            margin: 0 auto;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+
+        .mb-3 {
+            margin-bottom: 20px;
+        }
+
+        .mb-3:last-of-type {
+            margin-bottom: 28px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #222;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            padding: 10px 14px;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        .btn.btn-primary {
+            background: #22d3ee;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 24px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: background 0.2s;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="formAgregarUsuario">
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="varchar" class="form-control" id="email" required>
+        </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Nombre de la empresa</label>
+            <input type="text" class="form-control" id="name" required>
+        </div>
+        <div class="mb-3">
+            <label for="createdAt" class="form-label">Creado en</label>
+            <input type="datetime-local" class="form-control" id="createdAt" required>
+        </div>
+        <center>
+            <button type="submit" class="btn btn-primary">
+                Crear
+            </button>
+        </center>
+    </form>
+</body>
