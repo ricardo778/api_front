@@ -66,4 +66,32 @@
             </button>
         </center>
     </form>
+    <script>
+        const form = document.getElementById('formAgregarUsuario');
+
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const email = document.getElementById('correo').value.trim();
+            const password = document.getElementById('contrasena').value.trim();
+            const name = document.getElementById('nombre').value.trim();
+
+            try {
+                const response = await fetch('http://localhost:3000/users', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password, name })
+                });
+
+                if (!response.ok) throw new Error('No se pudo crear');
+
+                alert('✅ Usuario creado con éxito');
+                window.parent.location.reload(); // recarga el dashboard principal
+            } catch (error) {
+                console.error('❌ Error al crear usuario:', error);
+                alert('Error al crear usuario. Revisa los datos o la API.');
+            }
+        });
+    </script>
+
 </body>

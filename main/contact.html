@@ -94,26 +94,27 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-
-                    <form class="main_form">
+                    <form class="main_form" id="formContacto">
                         <div class="row">
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                                <input class="form-control" placeholder="Tu nombre" type="text" name="Your Name">
+                                <input class="form-control" placeholder="Tu nombre" type="text" id="name" required>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                                <input class="form-control" placeholder="Correo electrónico" type="text" name="Email">
-                            </div>
-                            <div class=" col-md-12">
-                                <input class="form-control" placeholder="Teléfono" type="text" name="Phone">
+                                <input class="form-control" placeholder="Correo electrónico" type="email" id="email"
+                                    required>
                             </div>
                             <div class="col-md-12">
-                                <textarea class="textarea" placeholder="Mensaje"></textarea>
+                                <input class="form-control" placeholder="Teléfono" type="text" id="phone" required>
                             </div>
-                            <div class=" col-md-12">
-                                <button class="send">Enviar</button>
+                            <div class="col-md-12">
+                                <textarea class="textarea" placeholder="Mensaje" id="message" required></textarea>
+                            </div>
+                            <div class="col-md-12">
+                                <button class="send" type="submit">Enviar</button>
                             </div>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>
@@ -189,6 +190,51 @@
             });
         });
     </script>
+
+    <script>
+        const form = document.getElementById('formContacto');
+
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const message = document.getElementById('message').value.trim();
+            try {
+                const resUser = await fetch(`http://localhost:3000/users/email/${email}`);
+
+                let user = null;
+                if (resUser.ok) {
+                    user = await resUser.json();
+                }
+
+                // Si no hay usuario o está vacío
+                if (!user || Object.keys(user).length === 0) {
+                    alert('Correo no registrado. Te redirigiremos para registrarte.');
+                    window.location.href = '../../dashboard/html/authentication-register.html';
+                    return;
+                }
+
+                // Usuario encontrado, enviar mensaje
+                const res = await fetch('http://localhost:3000/contacts', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, phone, message })
+                });
+
+                if (!res.ok) throw new Error('No se pudo guardar el mensaje');
+
+                alert('✅ Mensaje enviado correctamente');
+                form.reset();
+            } catch (error) {
+                console.error('❌ Error al enviar mensaje:', error);
+                alert('Error al enviar mensaje. Intenta más tarde.');
+            }
+
+        });
+    </script>
+
 </body>
 
 </html>

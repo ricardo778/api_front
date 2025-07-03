@@ -50,15 +50,11 @@
     <form id="formAgregarUsuario">
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="varchar" class="form-control" id="email" required>
+            <input type="email" class="form-control" id="email" required>
         </div>
         <div class="mb-3">
             <label for="name" class="form-label">Nombre de la empresa</label>
             <input type="text" class="form-control" id="name" required>
-        </div>
-        <div class="mb-3">
-            <label for="createdAt" class="form-label">Creado en</label>
-            <input type="datetime-local" class="form-control" id="createdAt" required>
         </div>
         <center>
             <button type="submit" class="btn btn-primary">
@@ -66,4 +62,31 @@
             </button>
         </center>
     </form>
+    <script>
+        const form = document.getElementById('formAgregarUsuario');
+
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value.trim();
+            const name = document.getElementById('name').value.trim();
+
+            try {
+                const response = await fetch('http://localhost:3000/providers', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, name })
+                });
+
+                if (!response.ok) throw new Error('No se pudo crear');
+
+                alert('✅ Proveedor creado con éxito');
+                window.parent.location.reload(); // recarga el dashboard principal
+            } catch (error) {
+                console.error('❌ Error al crear proveedor:', error);
+                alert('Error al crear proveedor. Revisa los datos o la API.');
+            }
+        });
+    </script>
+
 </body>

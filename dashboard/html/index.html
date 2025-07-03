@@ -73,14 +73,6 @@
               <span class="hide-menu">AUTENTICACIÓN</span>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./authentication-login.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-login"></i>
-                </span>
-                <span class="hide-menu">Iniciar sesión</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
               <a class="sidebar-link" href="./authentication-register.html" aria-expanded="false">
                 <span>
                   <i class="ti ti-user-plus"></i>
@@ -114,7 +106,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                   <div class="message-body">
-                    <a href="./authentication-login.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Cerrar
+                    <a href="./authentication-register.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Cerrar
                       sesión</a>
                   </div>
                 </div>
@@ -123,74 +115,64 @@
           </div>
         </nav>
       </header>
-      <!--  Fin Header -->
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-            <div class="card w-100"></div>
-            <div class="card-body">
-              <div class="d-flex justify-content-between align-items-center mb-4">
-                <h5 class="card-title fw-semibold mb-0">Ventas</h5>
-                <!-- Botón para abrir el modal -->
-                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregarUsuario">Agregar
-                  celular</button>
-              </div>
-              <!-- Modal con iframe para cargar el formulario externo -->
-              <div class="modal fade" id="modalAgregarUsuario" tabindex="-1" aria-labelledby="modalAgregarUsuarioLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="modalAgregarUsuarioLabel">Agregar celular</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                    </div>
-                    <div class="modal-body" style="padding:0;">
-                      <iframe src="../../dashboard/html/modales/form_cel.html"
-                        style="width:100%;border:none;min-height:350px;" title="Formulario Agregar Usuario"></iframe>
+            <div class="card w-100">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                  <h5 class="card-title fw-semibold mb-0">Ventas</h5>
+                  <!-- Botón para abrir el modal -->
+                  <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregarUsuario">
+                    Agregar celular
+                  </button>
+                </div>
+
+                <!-- Modal con iframe para cargar el formulario externo -->
+                <div class="modal fade" id="modalAgregarUsuario" tabindex="-1"
+                  aria-labelledby="modalAgregarUsuarioLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="modalAgregarUsuarioLabel">Agregar celular</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                      </div>
+                      <div class="modal-body" style="padding:0;">
+                        <iframe src="../../dashboard/html/modales/form_cel.html"
+                          style="width:100%;border:none;min-height:350px;" title="Formulario Agregar Usuario"></iframe>
+                      </div>
                     </div>
                   </div>
                 </div>
+
+                <!-- Tabla de celulares -->
+                <div class="table-responsive">
+                  <table class="table table-bordered text-nowrap align-middle">
+                    <thead class="table-light">
+                      <tr>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Publicado</th>
+                        <th>Creado</th>
+                        <th>Actualizado</th>
+
+                        <th>Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tabla-celulares">
+                      <!-- Aquí se llenarán las filas desde la API -->
+                    </tbody>
+                  </table>
+                </div>
               </div>
-              <div class="table-responsive">
-                <table class="table table-bordered text-nowrap align-middle">
-                  <thead class="table-light">
-                    <tr>
-                      <th>Marca</th>
-              </div>
-              <th>Modelo</th>
-              <th>Descripción</th>
-              <th>Precio</th>
-              <th>Stock</th>
-              <th>Publicado</th>
-              <th>Creado</th>
-              <th>Actualizado</th>
-              <th>Acciones</th>
-              </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Samsung</td>
-                  <td>Galaxy S21</td>
-                  <td>Smartphone 128GB</td>
-                  <td>$800</td>
-                  <td>15</td>
-                  <td>Sí</td>
-                  <td>2023-06-01</td>
-                  <td>2023-06-10</td>
-                    <td>
-                      <!-- Botón para Editar -->
-                      <button class="btn btn-sm btn-primary me-2" data-bs-toggle="modal" data-bs-target="#modalEditarCelular">Editar</button>
-                      <!-- Botón para Eliminar -->
-                      <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalEliminarCelular">Eliminar</button>
-                    </td>
-                </tr>
-                <!-- Más filas aquí -->
-              </tbody>
-              </table>
             </div>
           </div>
         </div>
       </div>
+
     </div>
     <div class="py-6 px-6 text-center">
       <p class="mb-0 fs-4">© 2025 SRMO. Todos los derechos reservados.</p>
@@ -198,6 +180,7 @@
   </div>
   </div>
   </div>
+  <!-- Tus scripts principales -->
   <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
   <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/js/sidebarmenu.js"></script>
@@ -205,6 +188,71 @@
   <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
   <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
   <script src="../assets/js/dashboard.js"></script>
+
+  <script>
+    const API_URL = 'http://localhost:3000/products';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      cargarCelulares();
+    });
+
+    function cargarCelulares() {
+      fetch(API_URL)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Error de red: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          const tbody = document.getElementById('tabla-celulares');
+          tbody.innerHTML = '';
+
+          if (!Array.isArray(data)) {
+            console.error('Respuesta inesperada de la API:', data);
+            return;
+          }
+
+          data.forEach(celular => {
+            const fila = document.createElement('tr');
+            fila.innerHTML = `
+            <td>${celular.brand}</td>
+            <td>${celular.model}</td>
+            <td>${celular.description}</td>
+            <td>$${celular.price.toLocaleString()}</td>
+            <td>${celular.stock}</td>
+            <td>${celular.published ? 'Sí' : 'No'}</td>
+            <td>${new Date(celular.createdAt).toLocaleDateString()}</td>
+            <td>${new Date(celular.updatedAt).toLocaleDateString()}</td>
+            <td>
+              <button class="btn btn-sm btn-primary me-2" onclick="editarCelular(${celular.id})">Editar</button>
+              <button class="btn btn-sm btn-danger" onclick="eliminarCelular(${celular.id})">Eliminar</button>
+            </td>
+          `;
+            tbody.appendChild(fila);
+          });
+        })
+        .catch(error => {
+          console.error('No se pudo cargar la información de la API:', error);
+          alert('Error al cargar los datos. Verifica que la API esté en funcionamiento.');
+        });
+    }
+
+    function editarCelular(id) {
+      console.log(`Editar celular con ID ${id}`);
+      // Puedes abrir un modal aquí si quieres
+    }
+
+    function eliminarCelular(id) {
+      console.log(`Eliminar celular con ID ${id}`);
+      // Puedes hacer una petición DELETE aquí
+    }
+  </script>
+
+</body>
+
+</html>
+
 </body>
 
 </html>

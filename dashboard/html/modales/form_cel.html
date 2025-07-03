@@ -81,4 +81,41 @@
             </button>
         </center>
     </form>
+    <script>
+        const API_URL = 'http://localhost:3000/products';
+
+        document.getElementById('formAgregarUsuario').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const data = {
+                brand: document.getElementById('brand').value,
+                model: document.getElementById('model').value,
+                description: document.getElementById('description').value,
+                price: Number(document.getElementById('price').value),
+                stock: Number(document.getElementById('stock').value),
+                published: document.getElementById('published').value === 'true',
+                userId: 1,         // Asegúrate que este userId existe en tu base de datos
+                providerId: 1      // Asegúrate que este providerId también existe
+            };
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (!response.ok) throw new Error('Error al crear el celular');
+
+                alert('✅ Celular creado exitosamente');
+
+                // Recarga la tabla en el HTML padre
+                window.parent.location.reload();
+            } catch (error) {
+                console.error('❌ Error al agregar celular:', error);
+                alert('Error al agregar celular. Verifica que la API esté activa y los datos sean válidos.');
+            }
+        });
+    </script>
+
 </body>

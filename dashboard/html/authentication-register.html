@@ -27,24 +27,20 @@
                   <img src="../../main/images/logo srmo.jpeg" width="150" alt="">
                 </a>
                 <p class="text-center">Registro</p>
-                <form>
+                <form id="formRegistro">
                   <div class="mb-3">
-                    <label for="exampleInputtext1" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="exampleInputtext1" aria-describedby="textHelp">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" required>
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Correo Electrónico</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <label for="email" class="form-label">Correo Electrónico</label>
+                    <input type="email" class="form-control" id="email" required>
                   </div>
                   <div class="mb-4">
-                    <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="password" required>
                   </div>
-                  <a href="./index.html" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Registrarse</a>
-                  <div class="d-flex align-items-center justify-content-center">
-                    <p class="fs-4 mb-0 fw-bold">¿Ya tienes una cuenta?</p>
-                    <a class="text-primary fw-bold ms-2" href="./authentication-login.html">Iniciar Sesión</a>
-                  </div>
+                  <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Registrarse</button>
                 </form>
               </div>
             </div>
@@ -55,6 +51,34 @@
   </div>
   <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
   <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    const form = document.getElementById('formRegistro');
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById('nombre').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      try {
+        const response = await fetch('http://localhost:3000/users', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, password })
+        });
+
+        if (!response.ok) throw new Error('No se pudo registrar');
+
+        alert('✅ Registro exitoso, Bienvenido(a) ' + name);
+        window.location.href = './index.html';
+      } catch (error) {
+        console.error('❌ Error al registrar usuario:', error);
+        alert('Error al registrar. Intenta más tarde.');
+      }
+    });
+  </script>
 </body>
 
 </html>
