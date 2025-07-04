@@ -94,8 +94,8 @@
                 price: Number(document.getElementById('price').value),
                 stock: Number(document.getElementById('stock').value),
                 published: document.getElementById('published').value === 'true',
-                userId: 1,         // Asegúrate que este userId existe en tu base de datos
-                providerId: 1      // Asegúrate que este providerId también existe
+                userId: 1,
+                providerId: 1
             };
 
             try {
@@ -105,11 +105,13 @@
                     body: JSON.stringify(data)
                 });
 
-                if (!response.ok) throw new Error('Error al crear el celular');
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`Error: ${errorText}`);
+                }
 
-                alert('✅ Celular creado exitosamente');
-
-                // Recarga la tabla en el HTML padre
+                const result = await response.json();
+                alert('✅ ' + result.message);
                 window.parent.location.reload();
             } catch (error) {
                 console.error('❌ Error al agregar celular:', error);
@@ -117,5 +119,6 @@
             }
         });
     </script>
+
 
 </body>
