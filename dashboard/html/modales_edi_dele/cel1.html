@@ -1,0 +1,117 @@
+<head>
+  <style>
+    #formEditarCelular {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      padding: 32px;
+      max-width: 400px;
+      margin: 0 auto;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+
+    .mb-3 {
+      margin-bottom: 20px;
+    }
+
+    .mb-3:last-of-type {
+      margin-bottom: 28px;
+    }
+
+    .form-label {
+      font-weight: 600;
+      color: #222;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .form-control {
+      border-radius: 8px;
+      border: 1px solid #e5e7eb;
+      padding: 10px 14px;
+      width: 100%;
+      font-size: 16px;
+    }
+
+    .btn.btn-primary {
+      background: #22d3ee;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 24px;
+      font-weight: 600;
+      font-size: 16px;
+      transition: background 0.2s;
+    }
+  </style>
+</head>
+  <form id="formEditarCelular">
+    <div class="mb-3">
+      <label class="form-label" for="brand">Marca</label>
+      <input class="form-control" id="brand" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="model">Modelo</label>
+      <input class="form-control" id="model" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="description">Descripción</label>
+      <input class="form-control" id="description" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="price">Precio</label>
+      <input type="number" class="form-control" id="price" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="stock">Stock</label>
+      <input type="number" class="form-control" id="stock" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="published">Publicado</label>
+      <select class="form-control" id="published">
+        <option value="true">Sí</option>
+        <option value="false">No</option>
+      </select>
+    </div>
+    <center>
+      <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    </center>
+  </form>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+    const API_URL = `http://localhost:3000/products/${id}`;
+
+    fetch(API_URL)
+      .then(res => res.json())
+      .then(cel => {
+        document.getElementById('brand').value = cel.brand;
+        document.getElementById('model').value = cel.model;
+        document.getElementById('description').value = cel.description;
+        document.getElementById('price').value = cel.price;
+        document.getElementById('stock').value = cel.stock;
+        document.getElementById('published').value = cel.published ? 'true' : 'false';
+      });
+
+    document.getElementById('formEditarCelular').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = {
+        brand: document.getElementById('brand').value,
+        model: document.getElementById('model').value,
+        description: document.getElementById('description').value,
+        price: Number(document.getElementById('price').value),
+        stock: Number(document.getElementById('stock').value),
+        published: document.getElementById('published').value === 'true'
+      };
+
+      await fetch(API_URL, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      alert('✅ Celular actualizado correctamente');
+      window.parent.location.reload();
+    });
+  </script>
+</body>

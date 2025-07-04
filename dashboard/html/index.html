@@ -145,6 +145,41 @@
                   </div>
                 </div>
 
+                <!-- Modal de Editar -->
+                <div class="modal fade" id="modalEditarCelular" tabindex="-1" aria-labelledby="modalEditarCelularLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="modalEditarCelularLabel">Editar celular</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                      </div>
+                      <div class="modal-body" style="padding:0;">
+                        <iframe id="iframeEditarCelular" src="" style="width:100%;border:none;min-height:350px;"
+                          title="Editar Celular"></iframe>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Modal de Eliminar -->
+                <div class="modal fade" id="modalEliminarCelular" tabindex="-1"
+                  aria-labelledby="modalEliminarCelularLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="modalEliminarCelularLabel">Eliminar celular</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                      </div>
+                      <div class="modal-body" style="padding:0;">
+                        <iframe id="iframeEliminarCelular" src="" style="width:100%;border:none;min-height:200px;"
+                          title="Eliminar Celular"></iframe>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
                 <!-- Tabla de celulares -->
                 <div class="table-responsive">
                   <table class="table table-bordered text-nowrap align-middle">
@@ -237,16 +272,21 @@
           alert('Error al cargar los datos. Verifica que la API esté en funcionamiento.');
         });
     }
-
     function editarCelular(id) {
-      console.log(`Editar celular con ID ${id}`);
-      // Puedes abrir un modal aquí si quieres
+      const iframe = document.getElementById('iframeEditarCelular');
+      iframe.src = `../../dashboard/html/modales_edi_dele/cel1.html?id=${id}`;
+      const modal = new bootstrap.Modal(document.getElementById('modalEditarCelular'));
+      modal.show();
     }
 
     function eliminarCelular(id) {
-      console.log(`Eliminar celular con ID ${id}`);
-      // Puedes hacer una petición DELETE aquí
+      const iframe = document.getElementById('iframeEliminarCelular');
+      iframe.src = `../../dashboard/html/modales_edi_dele/cel2.html?id=${id}`;
+      const modal = new bootstrap.Modal(document.getElementById('modalEliminarCelular'));
+      modal.show();
     }
+
+
   </script>
 
 </body>

@@ -1,0 +1,55 @@
+<head>
+    <style>
+        #formEliminar {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            padding: 32px;
+            max-width: 400px;
+            margin: 0 auto;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            text-align: center;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 8px;
+            padding: 10px 24px;
+            font-weight: 600;
+            font-size: 16px;
+            margin: 8px;
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            color: #fff;
+        }
+
+        .btn-secondary {
+            background: #e5e7eb;
+            color: #000;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div id="formEliminar">
+        <h3>¿Deseas eliminar este celular?</h3>
+        <button id="confirmar" class="btn btn-danger">Sí, eliminar</button>
+        <button class="btn btn-secondary" onclick="window.parent.location.reload()">Cancelar</button>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+
+        document.getElementById('confirmar').addEventListener('click', async () => {
+            await fetch(`http://localhost:3000/products/${id}`, {
+                method: 'DELETE',
+            });
+            alert('🗑️ Celular eliminado exitosamente');
+            window.parent.location.reload();
+        });
+    </script>
+</body>
