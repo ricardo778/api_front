@@ -186,6 +186,7 @@
                       <tr>
                         <th>Correo electrónico</th>
                         <th>Nombre</th>
+                        <th>Contraseña</th>
                         <th>Fecha de creación</th>
                         <th>Fecha de actualización</th>
                         <th>Acciones</th>
@@ -233,6 +234,7 @@
             fila.innerHTML = `
     <td>${usuario.email}</td>
     <td>${usuario.name}</td>
+    <td>${usuario.password}</td>
     <td>${new Date(usuario.createdAt).toLocaleDateString()}</td>
     <td>${new Date(usuario.updatedAt).toLocaleDateString()}</td>
     <td>
