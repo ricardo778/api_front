@@ -10,12 +10,10 @@
 </head>
 
 <body>
-  <!--  Contenedor principal -->
   <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
     data-sidebar-position="fixed" data-header-position="fixed">
-    <!-- Inicio Sidebar -->
+    <!-- Sidebar -->
     <aside class="left-sidebar">
-      <!-- Scroll Sidebar-->
       <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
           <a href="./index.html" class="text-nowrap logo-img">
@@ -25,68 +23,31 @@
             <i class="ti ti-x fs-8"></i>
           </div>
         </div>
-        <!-- Navegación Sidebar-->
         <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
           <ul id="sidebarnav">
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">Inicio</span>
             </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./index.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-layout-dashboard"></i>
-                </span>
-                <span class="hide-menu">Celulares</span>
-              </a>
-            </li>
-            <br>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./usuarios.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-layout-dashboard"></i>
-                </span>
-                <span class="hide-menu">Usuarios</span>
-              </a>
-            </li>
-            <br>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./mensajes.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-layout-dashboard"></i>
-                </span>
-                <span class="hide-menu">Mensajes</span>
-              </a>
-            </li>
-            <br>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./proveedores.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-layout-dashboard"></i>
-                </span>
-                <span class="hide-menu">Provedores</span>
-              </a>
-            </li>
-            <li class="nav-small-cap">
-              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-              <span class="hide-menu">AUTENTICACIÓN</span>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./authentication-register.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-user-plus"></i>
-                </span>
-                <span class="hide-menu">Registrarse</span>
-              </a>
-            </li>
+            <li class="sidebar-item"><a class="sidebar-link" href="./index.html"><i
+                  class="ti ti-layout-dashboard"></i><span class="hide-menu">Celulares</span></a></li><br>
+            <li class="sidebar-item"><a class="sidebar-link" href="./usuarios.html"><i
+                  class="ti ti-layout-dashboard"></i><span class="hide-menu">Usuarios</span></a></li><br>
+            <li class="sidebar-item"><a class="sidebar-link" href="./mensajes.html"><i
+                  class="ti ti-layout-dashboard"></i><span class="hide-menu">Mensajes</span></a></li><br>
+            <li class="sidebar-item"><a class="sidebar-link" href="./proveedores.html"><i
+                  class="ti ti-layout-dashboard"></i><span class="hide-menu">Provedores</span></a></li>
+            <li class="nav-small-cap"><i class="ti ti-dots nav-small-cap-icon fs-4"></i><span
+                class="hide-menu">AUTENTICACIÓN</span></li>
+            <li class="sidebar-item"><a class="sidebar-link" href="./authentication-register.html"><i
+                  class="ti ti-user-plus"></i><span class="hide-menu">Registrarse</span></a></li>
+          </ul>
         </nav>
-        <!-- Fin Navegación Sidebar -->
       </div>
-      <!-- Fin Scroll Sidebar-->
     </aside>
-    <!--  Contenido principal -->
+
+    <!-- Contenido -->
     <div class="body-wrapper">
-      <!--  Inicio Header -->
       <header class="app-header">
         <nav class="navbar navbar-expand-lg navbar-light">
           <ul class="navbar-nav">
@@ -107,46 +68,66 @@
                   <a href="./authentication-register.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Cerrar
                     sesión</a>
                 </div>
+              </li>
+            </ul>
           </div>
-          </li>
-          </ul>
-    </div>
-    </nav>
-    </header>
-    <!--  Fin Header -->
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-12</div>">
-          <div class="card w-100">
-            <div class="card-body">
-              <h5 class="card-title fw-semibold mb-4">Mensajes</h5>
-              <div class="table-responsive">
-                <table class="table table-bordered text-nowrap align-middle">
-                  <thead class="table-light">
-                    <tr>
-                      <th>Correo electrónico</th>
-                      <th>Teléfono</th>
-                      <th>Mensaje</th>
-                      <th>Creado</th>
-                      <th>Nombre</th>
-                      <th>Acciones</th>
-                    </tr>
-                  </thead>
-                  <tbody id="tabla-mensajes">
-                    <!-- Filas desde la API -->
-                  </tbody>
-                </table>
-              </div>
+        </nav>
+      </header>
+
+      <!-- Modal de Eliminar Mensaje -->
+      <div class="modal fade" id="modalEliminarMensaje" tabindex="-1" aria-labelledby="modalEliminarMensajeLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalEliminarMensajeLabel">Eliminar mensaje</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body" style="padding:0;">
+              <iframe id="iframeEliminarMensaje" src="" style="width:100%;border:none;min-height:200px;"
+                title="Eliminar Mensaje"></iframe>
             </div>
           </div>
         </div>
       </div>
-      <div class="py-6 px-6 text-center">
-        <p class="mb-0 fs-4">© 2025 SRMO. Todos los derechos reservados.</p>
+
+      <!-- Tabla -->
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card w-100">
+              <div class="card-body">
+                <h5 class="card-title fw-semibold mb-4">Mensajes</h5>
+                <div class="table-responsive">
+                  <table class="table table-bordered text-nowrap align-middle">
+                    <thead class="table-light">
+                      <tr>
+                        <th>Correo electrónico</th>
+                        <th>Teléfono</th>
+                        <th>Mensaje</th>
+                        <th>Creado</th>
+                        <th>Nombre</th>
+                        <th>Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tabla-mensajes">
+                      <!-- Filas desde la API -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="py-6 px-6 text-center">
+          <p class="mb-0 fs-4">© 2025 SRMO. Todos los derechos reservados.</p>
+        </div>
       </div>
     </div>
   </div>
-  </div>
+
+  <!-- Scripts -->
   <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
   <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/js/sidebarmenu.js"></script>
@@ -154,6 +135,7 @@
   <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
   <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
   <script src="../assets/js/dashboard.js"></script>
+
   <script>
     const API_CONTACTS = 'http://localhost:3000/contacts';
 
@@ -171,15 +153,15 @@
           data.forEach(contacto => {
             const fila = document.createElement('tr');
             fila.innerHTML = `
-            <td>${contacto.email}</td>
-            <td>${contacto.phone}</td>
-            <td>${contacto.message}</td>
-            <td>${new Date(contacto.createdAt).toLocaleDateString()}</td>
-            <td>${contacto.name}</td>
-            <td>
-              <button class="btn btn-danger btn-sm" onclick="eliminarMensaje(${contacto.id})">Eliminar</button>
-            </td>
-          `;
+              <td>${contacto.email}</td>
+              <td>${contacto.phone}</td>
+              <td>${contacto.message}</td>
+              <td>${new Date(contacto.createdAt).toLocaleDateString()}</td>
+              <td>${contacto.name}</td>
+              <td>
+                <button class="btn btn-sm btn-danger" onclick="eliminarMensaje(${contacto.id})">Eliminar</button>
+              </td>
+            `;
             tbody.appendChild(fila);
           });
         })
@@ -190,8 +172,10 @@
     }
 
     function eliminarMensaje(id) {
-      console.log(`Eliminar mensaje con ID ${id}`);
-      // Aquí podrías implementar el DELETE a la API si deseas
+      const iframe = document.getElementById('iframeEliminarMensaje');
+      iframe.src = `../../dashboard/html/modales_edi_dele/men.html?id=${id}`;
+      const modal = new bootstrap.Modal(document.getElementById('modalEliminarMensaje'));
+      modal.show();
     }
   </script>
 </body>

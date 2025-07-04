@@ -1,0 +1,63 @@
+  <style>
+    #confirmEliminar {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      padding: 32px;
+      max-width: 400px;
+      margin: 0 auto;
+      text-align: center;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+
+    .btn {
+      border-radius: 8px;
+      padding: 10px 24px;
+      font-weight: 600;
+      font-size: 16px;
+      border: none;
+      margin: 0 10px;
+      cursor: pointer;
+    }
+
+    .btn-danger {
+      background: #ef4444;
+      color: white;
+    }
+
+    .btn-secondary {
+      background: #9ca3af;
+      color: white;
+    }
+  </style>
+<body>
+  <div id="confirmEliminar">
+    <p>¿Estás seguro de que deseas eliminar este proveedor?</p>
+    <button class="btn btn-danger" onclick="eliminar()">Eliminar</button>
+    <button class="btn btn-secondary" onclick="cancelar()">Cancelar</button>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+
+    function eliminar() {
+      fetch(`http://localhost:3000/providers/${id}`, {
+        method: 'DELETE'
+      })
+        .then(res => {
+          if (!res.ok) throw new Error('Error al eliminar');
+          alert('Proveedor eliminado correctamente');
+          window.parent.location.reload();
+        })
+        .catch(err => {
+          console.error(err);
+          alert('No se pudo eliminar el proveedor');
+        });
+    }
+
+    function cancelar() {
+      window.parent.document.querySelector('[data-bs-dismiss="modal"]').click();
+    }
+  </script>
+</body>

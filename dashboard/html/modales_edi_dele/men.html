@@ -1,0 +1,75 @@
+<style>
+    #formEliminarMensaje {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      padding: 32px;
+      max-width: 400px;
+      margin: 0 auto;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+
+    .alerta {
+      font-size: 17px;
+      font-weight: 500;
+      color: #444;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 8px;
+      padding: 10px 24px;
+      font-weight: 600;
+      font-size: 16px;
+      transition: background 0.2s;
+      margin: 0 8px;
+    }
+
+    .btn-danger {
+      background: #ef4444;
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background: #e5e7eb;
+      color: #111827;
+    }
+  </style>
+</head>
+<body>
+  <form id="formEliminarMensaje" style="padding: 24px;">
+    <h5>¿Estás seguro de eliminar este mensaje?</h5>
+    <br />
+    <center>
+      <button type="submit" class="btn btn-danger">Eliminar</button>
+    </center>
+  </form>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+
+    document.getElementById('formEliminarMensaje').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      try {
+        const res = await fetch(`http://localhost:3000/contacts/${id}`, {
+          method: 'DELETE',
+        });
+
+        if (!res.ok) {
+          const error = await res.text();
+          throw new Error(error || 'Error al eliminar');
+        }
+
+        alert('✅ Mensaje eliminado correctamente');
+        window.parent.location.reload();
+      } catch (err) {
+        console.error('❌ Error al eliminar mensaje:', err);
+        alert('❌ No se pudo eliminar el mensaje.');
+      }
+    });
+  </script>
+</body>
