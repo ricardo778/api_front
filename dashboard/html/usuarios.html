@@ -143,6 +143,42 @@
                   </div>
                 </div>
 
+                <!-- Modal de Editar Usuario -->
+                <div class="modal fade" id="modalEditarUsuario" tabindex="-1" aria-labelledby="modalEditarUsuarioLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="modalEditarUsuarioLabel">Editar usuario</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                      </div>
+                      <div class="modal-body" style="padding:0;">
+                        <iframe id="iframeEditarUsuario" src="" style="width:100%;border:none;min-height:350px;"
+                          title="Editar Usuario"></iframe>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Modal de Eliminar Usuario -->
+                <div class="modal fade" id="modalEliminarUsuario" tabindex="-1"
+                  aria-labelledby="modalEliminarUsuarioLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="modalEliminarUsuarioLabel">Eliminar usuario</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                      </div>
+                      <div class="modal-body" style="padding:0;">
+                        <iframe id="iframeEliminarUsuario" src="" style="width:100%;border:none;min-height:200px;"
+                          title="Eliminar Usuario"></iframe>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
                 <!-- Tabla dinámica -->
                 <div class="table-responsive">
                   <table class="table table-bordered text-nowrap align-middle">
@@ -195,15 +231,15 @@
           data.forEach(usuario => {
             const fila = document.createElement('tr');
             fila.innerHTML = `
-            <td>${usuario.email}</td>
-            <td>${usuario.name}</td>
-            <td>${new Date(usuario.createdAt).toLocaleDateString()}</td>
-            <td>${new Date(usuario.updatedAt).toLocaleDateString()}</td>
-            <td>
-              <button class="btn btn-sm btn-primary me-2">Editar</button>
-              <button class="btn btn-sm btn-danger">Eliminar</button>
-            </td>
-          `;
+    <td>${usuario.email}</td>
+    <td>${usuario.name}</td>
+    <td>${new Date(usuario.createdAt).toLocaleDateString()}</td>
+    <td>${new Date(usuario.updatedAt).toLocaleDateString()}</td>
+    <td>
+      <button class="btn btn-sm btn-primary me-2" onclick="editarUsuario(${usuario.id})">Editar</button>
+      <button class="btn btn-sm btn-danger" onclick="eliminarUsuario(${usuario.id})">Eliminar</button>
+    </td>
+  `;
             tbody.appendChild(fila);
           });
         })
@@ -211,6 +247,19 @@
           console.error('❌ Error al cargar usuarios:', error);
           alert('Error al cargar los usuarios.');
         });
+    }
+    function editarUsuario(id) {
+      const iframe = document.getElementById('iframeEditarUsuario');
+      iframe.src = `../../dashboard/html/modales_edi_dele/usu1.html?id=${id}`;
+      const modal = new bootstrap.Modal(document.getElementById('modalEditarUsuario'));
+      modal.show();
+    }
+
+    function eliminarUsuario(id) {
+      const iframe = document.getElementById('iframeEliminarUsuario');
+      iframe.src = `../../dashboard/html/modales_edi_dele/usu2.html?id=${id}`;
+      const modal = new bootstrap.Modal(document.getElementById('modalEliminarUsuario'));
+      modal.show();
     }
   </script>
 </body>

@@ -1,0 +1,58 @@
+  <style>
+    #formEliminarUsuario {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      padding: 32px;
+      max-width: 400px;
+      margin: 0 auto;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      text-align: center;
+    }
+
+    .btn {
+      padding: 10px 24px;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 0 10px;
+    }
+
+    .btn-danger {
+      background-color: #ef4444;
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background-color: #9ca3af;
+      color: #fff;
+    }
+  </style>
+<body>
+  <form id="formEliminarUsuario">
+    <p>¿Estás seguro de que deseas eliminar este usuario?</p>
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <button type="button" class="btn btn-secondary" onclick="window.parent.location.reload()">Cancelar</button>
+  </form>
+
+  <script>
+    const userId = new URLSearchParams(window.location.search).get('id');
+    const API_URL = `http://localhost:3000/users/${userId}`;
+
+    document.getElementById('formEliminarUsuario').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const response = await fetch(API_URL, { method: 'DELETE' });
+
+      if (response.ok) {
+        alert('✅ Usuario eliminado');
+        window.parent.location.reload();
+      } else {
+        alert('❌ Error al eliminar usuario');
+      }
+    });
+  </script>
+</body>
+</html>
